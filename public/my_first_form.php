@@ -4,14 +4,12 @@
 ?>
 <form method="POST" >
     <p>
-        <label for="username">Username</label>
-        <input id="username"name="crazyman90" type="text">
+    	<label>Username: <input id="username"name="crazyman90" type="text" placeholder="Username Here" autofocus></label>
     </p>
     <p>
-        <label for="password"> Password</label>
-        <input id="password" name="codeup" type="password">
+        <input id="password" name="codeup" type="password" placeholder="Password Here">
     </p>
     <p>
-        <input type="Submit">
+        <input type="Submit" value="Log In">
     </p>
 </form>
