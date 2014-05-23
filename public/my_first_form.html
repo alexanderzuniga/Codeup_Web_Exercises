@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<?php 
+	echo "<h4>Get</h4> \n";
+	var_dump($_GET);
+	echo "<h4>Post</h4>";
+	var_dump($_POST);
+?>
+<form method="POST">
+<hr>    
+    <h4>User Login</h4>
+    <p>
+    	<label>Username:  <input id="username" name="crazyman90" type="text" placeholder="Username Here" autofocus></label>
+    </p>
+    <p>
+        <label for = "Password">Password: </label>
+        	<input id="password" name="codeup" type="password" placeholder="Password Here"></label>
+    </p>
+    <p>
+        <button type="submit"> Login </button>
+    </p>	
+</form>
+<hr>
+<h4>Compose Email</h4>
+<form method = "GET">
+	<p>
+    	<label>To:  <input id="Recipient" name="Recipient" type="text" placeholder="Recipient Email"></label>
+    </p>
+    <p>
+    	<label>From:  <input id="Sender" name="Sender" type="text" placeholder="Your email Here"></label>
+    </p>
+    <p>
+    	<label>Subject  <input id="Subject" name="Subject" type="text" placeholder="Subject"></label>
+    </p>
+	<p>
+		<label>Body
+		<textarea id="" name="Body" for="Body" rows="5" cols="45" placeholder="Input Here"></textarea>
+		</label>
+	</p>
+	<p>
+        <input type="checkbox" id="save" name="Save" value="yes" checked> Would you like to save your email? </button>
+    </p>
+	<p>
+        <button type="submit"> Send </button>
+    </p>	
+    <form "GET">
+    	<p>Multiple Choice Test</p>
+    	<p>Select Your Favorite Band!</p>
+    	<label><input type="radio" id="band" name="band[]" value="The Beatles">The Beatles</label>
+    	<label><input type="radio" id="band" name="band[]" value="The Beatles">The Beatles</label>
+    	<label><input type="radio" id="band" name="band[]" value="The Beatles">The Beatles</label>
+    	<label><input type="radio" id="band" name="band[]" value="The Beatles">The Beatles</label>
+    	<label><input type="radio" id="band" name="band[]" value="The Rolling Stones">The Rolling Stones</label>
+
+    </form>
+</form>
