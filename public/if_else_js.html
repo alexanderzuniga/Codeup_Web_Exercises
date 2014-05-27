@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Colors</title>
+</head>
+<body>
+	<h1>Colors</h1>
+	<script>
+	var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
+	var color = colors[Math.floor(Math.random()*colors.length)];
+	var favorite = "blue";
+	
+	var message = (color == favorite) ? "The random color matches your favorite color!" : "Here is a random color";
+		console.log(message);
+	
+	if (color == 'red'){
+		console.log("Red is the color if Geekdom Crown");
+	} else if (color == 'orange'){
+		console.log("Orange is the color of an orange...duh.");
+	} else if (color == 'yellow'){
+		console.log("Yellow is the color of my favorite planet, the Sun!");
+	} else if (color == 'green'){
+		console.log("Green is the color of kale in my shakes!");
+	} else if (color == 'blue'){
+		console.log("Blue is the color of music in New Orleans.");
+	} else {
+		console.log('I do not know anything by that color... womp womp...');
+	}
+	</script>		
+</body>
+</html>
