@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>break and Cont.</title>
+</head>
+<body>
+	<h1>Break and Cont.</h1>
+	<script>
+
+	do {
+		random = Math.floor((Math.random()*50)+1);
+	} while (random % 2 == 0);
+	console.log("Random number to skip is " + random);
+	
+	for (var i = 1; i < 50; i+=2){
+		if (i == random) {
+		console.log('Skipping number is: ' + random);
+		continue;
+	  }
+	  console.log('Current number is: ' + i);
+	} 
+
+	</script>
+</body>
+</html>
