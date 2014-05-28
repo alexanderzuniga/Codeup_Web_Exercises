@@ -5,12 +5,16 @@
 </head>
 <body>
 	<script>
+		console.log('vv For Loop vv');
 		var names = ['Alex', 'Danielle', 'Tirzah', 'Jordan'];
-		console.log('The length of the names array is ' + names.length);
-		console.log('The first name is ' +  names[0]);
-		console.log('The second name is ' +  names[1]);
-		console.log('The third name is ' +  names[2]);
-		console.log('The fourth name is ' +  names[3]);
+		for (i = 0; i < names.length; i++) {
+			console.log("The index of " + i + " has the name value of " + names[i]);
+		}
+		console.log('-------------------------------------')
+		console.log('vv forEach Loop vv');
+		names.forEach(function(title, index, array){
+			console.log("The index of " + index + " has the name value of " + title);
+		}); // syntax leaves parenths open and closes them at the end of the loop. 
 	</script>
 </body>
 </html>
