@@ -15,13 +15,13 @@ function import_csv($filename) {
 			$entries[] = $row;
 	  		}
 		}
-	fclose($handle);	
-  	return $entries;
+		fclose($handle);	
+	  	return $entries;
 	} 
 }
-$address_book = import_csv($filename); 		//importing list from csv file
+$address_book = import_csv($filename); 		  //importing list from csv file
 
-function write_csv($big_array, $filename) { //saving to csv file
+function write_csv($big_array, $filename) {  //saving to csv file
 	if (is_writable($filename)) {
 		$handle = fopen($filename, 'w');
 		foreach ($big_array as $fields) {
@@ -33,6 +33,8 @@ function write_csv($big_array, $filename) { //saving to csv file
 		} fclose($handle);	
 	}
 }
+
+if (isset($_GET))
 
 $new_address = [];
                                  			// Empty Field check. 
@@ -58,6 +60,13 @@ if (!empty($_POST['name']) &&
 		}
 	}
 }
+//Removing a Contact
+if (isset($_GET['removeIndex'])) {
+	$removeIndex = $_GET['removeIndex'];
+	unset($address_book[$removeIndex]);
+	write_csv($address_book, $filename);
+	header('Location: /address_book.php');
+} 
 
 ?>
 
@@ -76,11 +85,12 @@ if (!empty($_POST['name']) &&
 		<th>Zip Code</th>
 		<th>Phone</th>
 	</tr>
-	<? foreach($address_book as $fields) : ?>
+	<? foreach($address_book as $key => $fields) : ?>
 	<tr>
  			 <? foreach($fields as $value) : ?>
 		<td> <?= htmlspecialchars(strip_tags($value)); ?> </td> 
 			 <? endforeach ;?>
+		<td> <a href= "?removeIndex=<?=$key?>"> Remove Contact </a><br>
 	</tr>
 	<? endforeach ?>
 </table>	
