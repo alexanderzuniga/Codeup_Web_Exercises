@@ -1,38 +1,48 @@
 <?
 //var_dump($_POST);
-$address_book = [];
 $errorMessage = '';
-$filename = "data/address_book.csv";
 
+class AddressDataStore {
 
-function import_csv($filename) {
-	$entries = [];
-	if (is_readable($filename) && (filesize($filename) > 0)) {
-		$handle = fopen($filename, 'r');
-		while (!feof($handle)){
-			$row = fgetcsv($handle);
-			if (is_array($row)) {	
-			$entries[] = $row;
-	  		}
-		}
-		fclose($handle);	
-	  	return $entries;
-	} 
-}
-$address_book = import_csv($filename); 		  //importing list from csv file
+    public $filename = 'data/address_book.csv';
 
-function write_csv($big_array, $filename) {  //saving to csv file
-	if (is_writable($filename)) {
-		$handle = fopen($filename, 'w');
-		foreach ($big_array as $fields) {
-			if (isset($fields)){
-				fputcsv($handle, $fields);
-			} else {
-				echo "Enter a new contact.\n";
+    public function read_address_book()
+    {
+        // Code to read file $this->filename
+	       $entries = [];
+		if (is_readable($this->filename) && (filesize($this->filename) > 0)) {
+			$handle = fopen($this->filename, 'r');
+			while (!feof($handle)){
+				$row = fgetcsv($handle);
+				if (is_array($row)) {	
+				$entries[] = $row;
+		  		}
 			}
-		} fclose($handle);	
-	}
+			fclose($handle);
+		} 
+		return $entries;
+    }
+
+    public function write_address_book($addresses_array) 
+    {
+        // Code to write $addresses_array to file $this->filename
+	       if (is_writable($this->filename)) {
+			$handle = fopen($this->filename, 'w');
+			foreach ($addresses_array as $fields) {
+				if (isset($fields)){
+					fputcsv($handle, $fields);
+				} else {
+					echo "Enter a new contact.\n";
+				}
+			} fclose($handle);	
+		} 
+    }
 }
+
+$ADS = new AddressDataStore();
+$address_book = $ADS->read_address_book(); 
+
+
 
 if (isset($_GET))
 
@@ -52,7 +62,7 @@ if (!empty($_POST['name']) &&
 	$new_address ['phone'] = $_POST['phone'];
 
 	array_push($address_book, $new_address);
-	write_csv($address_book, $filename);
+	$ADS->write_address_book($address_book);
 } else {
 	foreach ($_POST as $key => $value) {
 		if (empty($value) && ($key != 'phone')) {
@@ -64,7 +74,7 @@ if (!empty($_POST['name']) &&
 if (isset($_GET['removeIndex'])) {
 	$removeIndex = $_GET['removeIndex'];
 	unset($address_book[$removeIndex]);
-	write_csv($address_book, $filename);
+	$ADS->write_address_book($address_book);
 	header('Location: /address_book.php');
 } 
 
@@ -77,6 +87,7 @@ if (isset($_GET['removeIndex'])) {
 </head>
 <body>
 	<h2>Address Book</h2>
+	<hr>
 <table border = "1">
 	<tr><th>Name</th>
 		<th>Street</th>
@@ -90,7 +101,7 @@ if (isset($_GET['removeIndex'])) {
  			 <? foreach($fields as $value) : ?>
 		<td> <?= htmlspecialchars(strip_tags($value)); ?> </td> 
 			 <? endforeach ;?>
-		<td> <a href= "?removeIndex=<?=$key?>"> Remove Contact </a><br>
+		<td> <a href= "?removeIndex=<?= $key ?>"> Remove Contact </a><br>
 	</tr>
 	<? endforeach ?>
 </table>	
