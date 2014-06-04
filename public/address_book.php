@@ -1,83 +1,108 @@
-<?
+<?php
 //var_dump($_POST);
+$new_address = [];
 $errorMessage = '';
 
-class AddressDataStore {
+class AddressDataStore 
+{
 
-    public $filename = 'data/address_book.csv';
+	public $filename = '';
+	public function __construct($filename = 'data/address_book.csv')
+	{
+		$this->filename = $filename;
+	}
 
-    public function read_address_book()
-    {
-        // Code to read file $this->filename
-	       $entries = [];
-		if (is_readable($this->filename) && (filesize($this->filename) > 0)) {
-			$handle = fopen($this->filename, 'r');
-			while (!feof($handle)){
-				$row = fgetcsv($handle);
-				if (is_array($row)) {	
+	public function read_address_book()
+	{
+		$entries = []; 
+		$handle = fopen($this->filename, 'r');
+		while (!feof($handle)) {
+			$row = fgetcsv($handle);
+			if (is_array($row)) {	
 				$entries[] = $row;
-		  		}
-			}
-			fclose($handle);
-		} 
+			}			
+		}
+		fclose($handle); 	
 		return $entries;
-    }
+	}
 
-    public function write_address_book($addresses_array) 
-    {
+	public function write_address_book($addresses_array) 
+	{
         // Code to write $addresses_array to file $this->filename
-	       if (is_writable($this->filename)) {
+		if (is_writable($this->filename)) 
+		{
 			$handle = fopen($this->filename, 'w');
-			foreach ($addresses_array as $fields) {
-				if (isset($fields)){
-					fputcsv($handle, $fields);
-				} else {
-					echo "Enter a new contact.\n";
-				}
-			} fclose($handle);	
-		} 
-    }
+			foreach ($addresses_array as $fields) 
+			{
+				fputcsv($handle, $fields);
+			}	
+			fclose($handle);
+		} 	 
+	}
+
+	public function __destruct()
+	{
+		echo "Class Dissmissed!\n";
+	}
+
 }
+			//End Class
+$ads = new AddressDataStore('address_book.csv');
+$address_book = $ads->read_address_book(); 
 
-$ADS = new AddressDataStore();
-$address_book = $ADS->read_address_book(); 
-
-
-
-if (isset($_GET))
-
-$new_address = [];
                                  			// Empty Field check. 
 if (!empty($_POST['name']) && 
 	!empty($_POST['address']) && 
 	!empty($_POST['city']) && 
 	!empty($_POST['state']) && 
-	!empty($_POST['zip_code'])) {
+	!empty($_POST['zip'])) {
 
 	$new_address ['name'] = $_POST['name'];
 	$new_address ['address'] = $_POST['address'];
 	$new_address ['city'] = $_POST['city'];
 	$new_address ['state'] = $_POST['state'];
-	$new_address ['zip_code'] = $_POST['zip_code'];
+	$new_address ['zip'] = $_POST['zip'];
 	$new_address ['phone'] = $_POST['phone'];
-
+											// Adding new_address values to the address book
 	array_push($address_book, $new_address);
-	$ADS->write_address_book($address_book);
-} else {
-	foreach ($_POST as $key => $value) {
-		if (empty($value) && ($key != 'phone')) {
+	$ads->write_address_book($address_book);
+} 
+else 
+{
+	foreach ($_POST as $key => $value) 
+	{
+		if (empty($value) && ($key != 'phone')) 
+		{
 			$errorMessage .= "<p> **Must enter " . ucfirst($key) . "**<p>";
 		}
 	}
 }
 //Removing a Contact
-if (isset($_GET['removeIndex'])) {
+if (isset($_GET['removeIndex'])) 
+{
 	$removeIndex = $_GET['removeIndex'];
 	unset($address_book[$removeIndex]);
-	$ADS->write_address_book($address_book);
+	$ads->write_address_book($address_book);
 	header('Location: /address_book.php');
+	exit;
 } 
+if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0) {
 
+    if ($_FILES['file1']["type"] != "text/csv") {
+        echo "ERROR: file must be in text/csv!";
+    } else {
+
+        $upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';
+        $filename = basename($_FILES['file1']['name']);
+
+        $saved_filename = $upload_dir . $uploadFilename;
+        move_uploaded_file($_FILES['file1']['tmp_name'], $saved_filename);
+
+        $address_uploaded = $upload->read_address_book();
+        $address_book = array_merge($address_book, $address_uploaded);
+        $storeData->write_address_book($address_book);
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -172,13 +197,25 @@ if (isset($_GET['removeIndex'])) {
 </select></label>
     </p>
     <p>
-    	<label> Zip Code <input id="zip_code" name="zip_code" type="text"></label>
+    	<label> Zip Code <input id="zip" name="zip" type="text"></label>
     </p>
     <p>
     	<label> Phone Number <input id="phone" name="phone" type="text"></label>
     </p>
     <p>
         <button type="submit"> Save </button>
-    </p>	
+    </p>
+<? if (isset($saved_filename)) : ?>
+<?=  "<p>You can download your file <a href='/uploads/{$filename}'>here</a>.</p>"; ?>
+<? endif; ?>
+<form method="POST" enctype="multipart/form-data" >
+           <p>
+               <label for="file1">File to upload: </label>
+               <input type="file" id="file1" name="file1">
+           </p>
+
+           <p><input type="submit" value="Upload"></p>
+
+       </form>	
 </body>
 </html>
