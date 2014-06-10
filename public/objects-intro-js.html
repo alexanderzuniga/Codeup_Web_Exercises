@@ -1,11 +1,16 @@
 <script type="text/javascript">
+
+// defining the object
 var person = {};
 
+// assigning object properties
 person.firstName = "Alex";
 person.lastName = "Zuniga";
 
+// properties can included a function
 person.SayHello = function () {
 	alert (this.firstName + this.lastName + " says YO WHATS UP?!?!");
 }
+// run the function property 
 person.SayHello();
 </script>
