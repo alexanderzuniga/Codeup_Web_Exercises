@@ -20,9 +20,26 @@
 		</ul>
 </div>	
 <script>
-	
-	$(".codeup").css('border-style','solid').css('border-width','1px').css('border-color', 'red');
-
+	$('document').ready(function(){
+		$('h1').click(function(){
+			$(this).css('color', 'blue');
+		});
+	});
+	$('document').ready(function(){
+		$('p').dblclick(function(){
+			$(this).css('font-size', '18px');
+		});
+	});
+	$('document').ready(function(){
+		$('li').hover(
+			function(){
+				$(this).css('color', 'red');
+				},
+			function(){
+				$(this).css('color', 'white');
+				}
+			);
+		});
 </script>
 </body>
 </html>
