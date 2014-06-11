@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>moment</title>
+<script src="moment-with-langs.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+// todo:
+// Create an array of months for printing dates without Moment.js.
+var months = ['January','February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+// todo:
+// Create the date corresponding to your birthday using the JavaScript Date object.
+var jsBirthday = new Date(1990, 0, 3); //date object has ZERO index. Jan = 0
+var date = jsBirthday.getDate();
+var year = jsBirthday.getFullYear();
+
+// // todo:
+// // Log your birthday in the format: January 1, 2014 using the JavaScript Date object.
+// // See link below for methods needed:
+// // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#Getter
+console.log('Here is my birthday using vanilla js: ' + months[0] + " "  + date + "," + year);
+
+// create the date corresponding to your birthday using Moment.js.
+
+// VVVThis line makes everything above excessive.VVV
+var momentBirthday = moment("1990-01-03").format('MMMM D, YYYY'); 
+
+// todo:
+// Log your birthday in the format: January 1, 2014 using Moment.js.
+console.log('Here is my birthday using Moment.js: ' + momentBirthday);
+</script>
+</body>
+</html>
