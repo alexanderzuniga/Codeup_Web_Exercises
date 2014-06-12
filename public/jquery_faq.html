@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Invisable</title>
+	<style>
+        
+        .dissapear {
+        	display: none;    
+        }
+
+    </style>
+    <script src="/js/jquery.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#highlight-important').click(function(event) {
+            	console.log('it clicked');
+                event.preventDefault();
+                $(".invisable").toggleClass('dissapear');
+            });
+        });
+        //  $(document).ready(function() {
+        //     $('#highlight-important').click(function(event) {
+        //         event.preventDefault();
+        //         $(".invisable").toggleClass();
+        //     });
+        // });
+        
+    </script>
+</head>
+<body>
+<h1>Top 10 FAQ about American National Parks</h1>
+<dl>
+  <dt>Which is the BEST national park ever?</dt>
+  	<dd class='invisable'>Badlands!!! </dd>
+
+  <dt> How many volcanoes are in the Volcano National Park?</dt>
+  	<dd class='invisable'>Seventy Six</dd>
+
+  <dt>How tall if the tallest tree in Yosemite National Park?</dt>
+  	<dd class='invisable'>215ft</dd>
+
+  <dt>Where do you get a good beignet around New Orleans Jazz Historical Park?</dt>
+  	<dd class='invisable'>Cafe Du Mond. </dd>
+
+  <dt>Why do they call it Blue Ridge Parkway?</dt>
+  	<dd class='invisable'>Paul Bunyan named the mountains "Blue Ridge" after his bull. </dd>
+
+  <dt>How any people came through Ellis Island from Europe, the now site of the Statue of Liberty National Monument?</dt>
+  	<dd class='invisable'>Thousands, especially during WW2. Many however may have been undocumented in the overwhelming waves of immagrants seeking refuge in the United States. </dd>
+
+  <dt>Are there any aliens on the Santa Fe National Historic Trail?</dt>
+  	<dd class='invisable'>You're thinking of Rosewell... </dd>
+
+  <dt>Where are the Penguins in Alagnak Wild River Natnional Park?</dt>
+  	<dd class='invisable'>It is not that cold here. </dd>
+
+  <dt>Was this in the Gettysburg National Military Park in "Rememeber the Titans"?</dt>
+  	<dd class='invisable'>Yes... </dd>
+ 
+</dl>
+<a href="#" id="highlight-important">Hide/Show the Answers</a>
+</body>
+</html>
