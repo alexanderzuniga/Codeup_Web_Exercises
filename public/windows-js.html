@@ -1,0 +1,34 @@
+<html>
+<head>
+    <title>Delayed Autosave</title>
+</head>
+<body>
+
+    <h2>Autosaving Text Input</h2>
+    <textarea rows="10" cols="60" id="important"></textarea>
+
+    <script>
+        delay = 3000;
+        var timeoutId = null;
+
+        function save() {
+            alert('Saved!');
+        }
+        function autosave() {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(function() {
+                save();
+            }, delay); // we could simply put 5000 in the place of delay. 
+        }
+        
+        // don't modify the line below
+        // this causes the autosave function to be called whenever
+        // a key up event occurs in the textarea
+        // we will learn about events in the DOM lessons
+    
+        $('#important').on('keyup', autosave); //jQuery syntax. keyup cathes any key once it is released after pressing. 
+           
+    </script>
+
+</body>
+</html>
