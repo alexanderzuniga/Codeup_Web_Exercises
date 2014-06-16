@@ -1,0 +1,74 @@
+body {
+  background: url(img/thy_holy_background.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.section {
+	clear: both;
+	padding: 0px;
+	margin-left: 5%;	
+}
+/*setting up tht cols*/
+.col {
+	display: block;
+	float:left;
+	margin: 1% 0 1% -5.4%;
+}
+.col:first-child { margin-left: 0; }
+.group:before,
+.group:after {
+	content:"";
+	display:table;
+}
+.group:after {
+	clear:both;
+}
+.group {
+    zoom:1; /* For IE 6/7 */
+}
+
+/*  GRID OF THREE  */
+
+.span_1_of_3 {
+	width: 21%;
+}
+
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+
+@media only screen and (max-width: 480px) {
+	.col { 
+		margin: 1% 0 1% 0%;
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	.span_3_of_3 {
+		width: 100%; 
+	}
+	.span_2_of_3 {
+		width: 100%; 
+	}
+	.span_1_of_3 {
+		width: 100%;
+	}
+}
+.mole {
+	height: 200px;
+	width:200px;
+	border: 2px solid #CCC;
+	margin-right: 2px;
+	display:none;
+	pointer: cursor;
+}
+div.hole {
+	float:left;
+}
+#container {
+	border:1px solid black;
+}
+#menu {
+	height: 100%;
+	width: 40;
+}
