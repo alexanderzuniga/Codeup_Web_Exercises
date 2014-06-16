@@ -4,6 +4,8 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  font-family: cloister black; 
+  font-size: 18px;
 }
 .section {
 	clear: both;
@@ -71,4 +73,12 @@ div.hole {
 #menu {
 	height: 100%;
 	width: 40;
+	color:#DB0300;
+}
+#counter {
+	font-size: 20px;
+}
+.hole {
+	height: 200px;
+	width:200px ;
 }
