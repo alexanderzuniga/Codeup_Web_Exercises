@@ -1,21 +1,97 @@
 <!DOCTYPE html>
 <html>
 <head>
+	
+	<link href="whack_style.css" rel="stylesheet" media="screen">
 	<title>Whack</title>
 </head>
 <body>
-<img style="display:none;" src="img/mole.png" height="42" width="42">
-</body>
-<script  src="/js/jquery.js"></script>
+<!-- Create your HTML markup and CSS to position your holes. These will be element that your mole will pop in and out of. -->
+<div id="menu">
+		<h1>SLAY THY SCARY MONSTER!!</h1>
+		<button id="start" type="button" class="btn btn-default btn-lg"> Play </button>
+		<div id="counter">DEAD MONSTERS: 0</div>
+		<div id="timer">TIME LIMIT: </div>
+	</div>
+<div class="section group">
+	<div class="col span_1_of_3">
+		<div class="hole" id="1">
+			<img class="mole" id="mole1" src="img/thy_scary_monster.jpg">
+		</div>
+		<div class="hole" id="2">
+			<img class="mole" id="mole2" src="img/thy_scary_monster.jpg">
+		</div>
+		<div class="hole" id="3">
+			<img class="mole" id="mole3" src="img/thy_scary_monster.jpg">
+		</div>
+	</div>
+	<div class="col span_1_of_3">
+		<div class="hole" id="4">
+			<img class="mole" id="mole4" src="img/thy_scary_monster.jpg">
+		</div>
+		<div class="hole" id="5">
+			<img class="mole" id="mole5" src="img/thy_scary_monster.jpg">
+		</div>
+		<div class="hole" id="6">
+			<img class="mole" id="mole6" src="img/thy_scary_monster.jpg">
+		</div>
+	</div>
+	<div class="col span_1_of_3">
+		<div class="hole" id="7">
+			<img class="mole" id="mole7" src="img/thy_scary_monster.jpg">
+		</div>
+		<div class="hole" id="8">
+			<img class="mole" id="mole8" src="img/thy_scary_monster.jpg">
+		</div>
+		<div class="hole" id="9">
+			<img class="mole" id="mole9" src="img/thy_scary_monster.jpg">
+		</div>
+	</div>
+</div>
+<script src="js/jquery.js"></script>
 <script>
+// VARIABLES
+var time = 30; //time limit
+var count = 0;
+var gameInterval;
+var gameTime;
+var hole = $('.hole');
+var randomBox = 0;
 
-$('img').fadeIn(1000);
-$('img').click(function(){
-	$(this).fadeOut();
+console.log(hole);
+
+// THIS IS MY START BUTTON. CALLS BOTH FUNCTIONS BELOW.
+$('#start').click(function(){
+	gameInterval = setInterval(action, 1500);
+	gameTime = setInterval(countdown, 1000);
 });
 
+function getRandomInt(min, max) {
+  	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
+// THIS IS MY ACTION FUNCTION: WHEN START BUTTON IS PRESSED.
+var action = function(){
+	var rand = getRandomInt(1, 9);
+	var moles = $('.mole');
+	var currentMole = moles[rand - 1];
+	$(currentMole).fadeIn().delay(500).fadeOut();			
+}
 
+// THIS IS MY COUNTDOWN FUNCTION
+var countdown = function(){
+	--time;
+	$('#timer').html("SEC LEFT: " + time);
+	if (time == 0){
+		clearInterval(gameInterval);
+	}
+};
+
+// THIS IS MY SCORE COUNTER
+$(".hole").children().click(function() {
+	count++;
+	$("#counter").html("STRIKES: " + count);
+});
 </script>
-
+</body>
 </html>
