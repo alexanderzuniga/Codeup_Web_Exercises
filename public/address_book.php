@@ -6,6 +6,7 @@ require_once ('classes/address_data_store.php');
 
 $ads = new AddressDataStore('address_book.csv');
 $address_book = $ads->read_csv(); 
+class CustomException extends Exception {}
 
                                  			// Empty Field check. 
 if (!empty($_POST['name']) && 
@@ -27,12 +28,27 @@ $ads->write_csv($address_book);
 else 
 {
 	foreach ($_POST as $key => $value) {	
-		if (strlen($value) > 150) {
-			throw new Exception ("** Input must be less than 150 charachters **");
-		} elseif (empty($value) && ($key != 'phone')) {
-			throw new Exception ("**Must enter " . ucfirst($key) . "**");
+		try
+		{
+			if (strlen($value) > 150) 
+			{
+				throw new CustomException ("<script type='text/javascript'>alert('Input must be less than 150 charachters');</script>");	
+			}
+			elseif (empty($value) && ($key != 'phone')) 
+			{
+				throw new Exception ("**Must enter " . ucfirst($key) . "**" . PHP_EOL);
+			}
 		}
-	}
+		catch (CustomException $ce) 
+		{
+			echo  $ce->getMessage();
+			$msg = $ce-> getMessage() . PHP_EOL;
+		} 
+		catch (Exception $e) {
+			echo "Extention:" . $e->getMessage() . PHP_EOL;
+			$msg = $e-> getMessage() . PHP_EOL;
+		}
+	} 
 }
 //Removing a Contact
 if (isset($_GET['removeIndex'])) 
